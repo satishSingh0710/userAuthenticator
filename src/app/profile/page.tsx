@@ -31,37 +31,38 @@ export default function ProfilePage() {
   const getUserDetails = async () => {
     const res = await axios.get(`/api/users/me`)
     console.log("The details of the users are : ", res.data);
-    setData(res.data.data._id);
-    // console.log("The data is : ", data);  
-    // router.push(`/profile/${data}`); 
+    setData(res?.data?.data?._id);
   }
 
-  useEffect(() => {
-    getUserDetails();
-  }, [])
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 flex-col">
+    <div className="flex items-center justify-center min-h-screen bg-black flex-col p-6">
       <Toaster position="top-right" reverseOrder={false} />
-      <h1 className="text-4xl font-bold text-gray-800 mb-4">Profile Page</h1>
+      <h1 className="text-4xl font-bold text-white mb-6">Profile Page</h1>
+
       <button
-        className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="px-6 py-3 text-white bg-yellow-600 rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 mb-4"
         onClick={logoutUser}
       >
-        {
-          loading ? "Processing" : "Logout"
-        }
+        {loading ? "Processing" : "Logout"}
       </button>
-      {
-        data === "nothing" ? null : <Link className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400" href={`/profile/${data}`}>{data}</Link>
-      }
+
+      {data === "nothing" ? null : (
+        <Link
+          className="px-6 py-3 text-white bg-yellow-600 rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 mb-4"
+          href={`/profile/${data}`}
+        >
+          {data}
+        </Link>
+      )}
+
       <button
-        className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
-        onClick={getUserDetails}>
-        {
-          loading ? "Processing" : "Get User Details"
-        }
+        className="px-6 py-3 text-white bg-yellow-600 rounded-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+        onClick={getUserDetails}
+      >
+        {loading ? "Processing" : "Get User Details"}
       </button>
     </div>
+
   );
 }
