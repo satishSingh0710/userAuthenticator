@@ -22,7 +22,7 @@ export async function GET(req: NextRequest){
             message: "Reset password email sent successfully",
             success: true
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.log("Error in sendResetPasswordMail:", error);
     }
 }

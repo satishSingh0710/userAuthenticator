@@ -22,7 +22,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
     try {
       await axios.get("/api/users/sendResetPasswordMail"); // Send mail to user
       setMailSent(true);
-    } catch (error: any) {
+    } catch (error: unknown) {
       setMailSent(false);
       console.error("Failed to send mail:", error);
     }

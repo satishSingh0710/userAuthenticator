@@ -23,7 +23,7 @@ export default function VerifyEmailPage() {
             await axios.post("/api/users/forgotpassword", { token, password });
             setSuccess(true);
             toast.success("Password changed successfully");
-        } catch (error: any) {
+        } catch (error: unknown) {
             setError(true);
             toast.error("Failed to change password");
             console.log(error);

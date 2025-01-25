@@ -13,8 +13,8 @@ export async function GET() {
     });
 
     return response;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.log("Error in logout:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error }, { status: 500 });
   }
 }

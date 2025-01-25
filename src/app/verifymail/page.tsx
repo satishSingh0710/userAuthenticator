@@ -17,14 +17,14 @@ export default function VerifyEmailPage() {
             await axios.post("/api/users/verifymail", { token })
             setVerified(true);
             toast.success("Email verified successfully");
-        } catch (error: any) {
+        } catch (error: unknown) {
             setError(true);
             console.log(error);
         } finally {
             setLoading(false);
         }
     }
-    
+
     useEffect(() => {
         if (token.length > 0) {
             verifyUserEmail();

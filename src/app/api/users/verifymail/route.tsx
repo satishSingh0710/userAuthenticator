@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
             message: "Email verified successfully",
             success: true,
         });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.log("Error in emailVerification:", error);
     }
 }

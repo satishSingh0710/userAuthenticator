@@ -41,11 +41,11 @@ export async function POST(request: NextRequest) {
       success: true,
       savedUser,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error in signup:", error);
     return NextResponse.json(
       {
-        error: error.message,
+        error
       },
       { status: 500 }
     );
