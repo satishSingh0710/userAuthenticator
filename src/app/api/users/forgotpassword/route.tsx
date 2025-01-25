@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
             success: true
         });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.log("Error in resetPassword:", error);
     }
 }
