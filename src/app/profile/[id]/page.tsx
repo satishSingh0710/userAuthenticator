@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { set } from "mongoose";
+
 
 interface ProfilePageProps {
   params: Promise<{ id: string }>; // Type params as a Promise

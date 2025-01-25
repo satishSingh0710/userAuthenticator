@@ -9,7 +9,7 @@ export default function VerifyEmailPage() {
     const [token, setToken] = useState("");
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
-    const [loading, setLoading] = useState<Boolean>(false);
+    // const [loading, setLoading] = useState<Boolean>(false);
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -19,7 +19,7 @@ export default function VerifyEmailPage() {
                 toast.error("Passwords do not match");
                 return;
             }
-            setLoading(true);
+            // setLoading(true);
             await axios.post("/api/users/forgotpassword", { token, password });
             setSuccess(true);
             toast.success("Password changed successfully");
@@ -28,7 +28,7 @@ export default function VerifyEmailPage() {
             toast.error("Failed to change password");
             console.log(error);
         } finally {
-            setLoading(false);
+            // setLoading(false);
         }
     }
 

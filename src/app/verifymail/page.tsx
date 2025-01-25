@@ -9,9 +9,9 @@ export default function VerifyEmailPage() {
     const [token, setToken] = useState("");
     const [error, setError] = useState(false);
     const [verified, setVerified] = useState(false);
-    const [loading, setLoading] = useState<Boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const verifyUserEmail = async () => {
+    const verifyUserEmail =  async () => {
         try {
             setLoading(true);
             await axios.post("/api/users/verifymail", { token })

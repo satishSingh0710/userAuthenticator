@@ -1,9 +1,15 @@
 import nodemailer from "nodemailer";
 import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
-import { MailtrapClient, MailtrapTransport } from "mailtrap";
+// import { MailtrapClient, MailtrapTransport } from "mailtrap";
 
-export const sendEmail = async ({ email, emailType, userId }: any) => {
+interface EmailParams {
+  email: string;
+  emailType?: "VERIFY" | "RESET"; // Optional property
+  userId: string;
+}
+
+export const sendEmail = async ({ email, emailType, userId }: EmailParams) => {
   try {
     if (!email || !emailType || !userId) {
       throw new Error("Please provide email, emailType and userId");
@@ -23,7 +29,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       });
     }
 
-    var transport = nodemailer.createTransport({
+    const transport = nodemailer.createTransport({
       host: "sandbox.smtp.mailtrap.io",
       port: 2525,
       auth: {
@@ -72,15 +78,17 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       }
       or copy and paste the link below in your browser. <br> ${
         process.env.DOMAIN
-      }/${emailType==="VERIFY"?"verifymail":"forgotpassword"}?token=${hashed}
+      }/${
+        emailType === "VERIFY" ? "verifymail" : "forgotpassword"
+      }?token=${hashed}
       </p>`,
     };
 
     const mailResponse = await transport.sendMail(mailOptions);
 
     return mailResponse;
-  } catch (error: any) {
-    console.log("Error in sending verification mail");
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    console.log("Error in sending verification mail", error);
+    throw new Error("Error in sending verification mail");
   }
 };
